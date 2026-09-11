@@ -51,6 +51,13 @@ Refer to technology-specific instruction files:
 - Use props for configuration, not duplication
 - Document component APIs with TypeScript types
 
+### Commenting philosophy
+
+- Explain intent and trade-offs, not the mechanics of the code.
+- Comments should answer "why this exists" or "why this branch/constraint matters".
+- Remove comments that only repeat the names or logic already visible in the code.
+- Treat stale comments as defects and update or delete them in the same change as the code they describe.
+
 ## Development Workflow
 
 1. **Choose the right tool**: 

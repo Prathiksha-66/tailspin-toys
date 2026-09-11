@@ -63,6 +63,25 @@ Seed-derived values must be reproducible across builds. Derive star ratings from
 
 Unit-test transforms directly and helpers against `createTestDatabase()`. See [`unit-tests.instructions.md`](unit-tests.instructions.md).
 
+## Commenting and exported API documentation
+
+Every exported function in `db/**/*.ts` and `src/lib/**/*.ts` must include JSDoc/TSDoc that explains its purpose, the meaning of each parameter, and the return value using `@param` and `@returns` when relevant. The injectable `db` argument should be described so the testing pattern stays explicit and discoverable.
+
+Use comments to explain intent and contract boundaries, not to paraphrase the implementation. If a helper exists to keep seeds deterministic, protect against a subtle data issue, or enforce ordering for static generation, document that rationale.
+
+```ts
+/**
+ * Return every game id in alphabetical title order so the static build is deterministic.
+ *
+ * @param db - The writable or in-memory Drizzle database instance.
+ * @returns A list of game ids sorted by title.
+ */
+export async function getAllGameIds(db: Database): Promise<number[]> {
+  const rows = await db.select({ id: games.id }).from(games).orderBy(asc(games.title));
+  return rows.map((r) => r.id);
+}
+```
+
 ## Node.js requirement
 
 Node.js 22.13 or later is required because the data layer uses the built-in `node:sqlite` module without an experimental flag. Do not introduce third-party SQLite drivers that ship platform-specific binaries.
