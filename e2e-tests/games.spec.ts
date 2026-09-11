@@ -6,6 +6,19 @@ test.describe('Game Listing and Navigation', () => {
       await page.goto('/');
     });
 
+    await test.step('Filter games by multiple categories and publisher', async () => {
+      const visibleCards = page.locator('[data-testid="game-card"]:visible');
+
+      await page.getByLabel('Strategy').check();
+      await page.getByLabel('Puzzle').check();
+      await expect(visibleCards).toHaveCount(8);
+      await page.getByTestId('publisher-filter').selectOption({ label: 'CodeForge Studios' });
+      await expect(visibleCards).toHaveCount(2);
+      await expect(visibleCards).toContainText(['Code Puzzle Chronicles', 'DevOps Dominion']);
+      await page.getByTestId('clear-filters').click();
+      await expect(visibleCards).toHaveCount(21);
+    });
+
     await test.step('Verify games grid is visible', async () => {
       const gamesGrid = page.getByTestId('games-grid');
       await expect(gamesGrid).toBeVisible();
