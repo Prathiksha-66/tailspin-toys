@@ -90,3 +90,9 @@ Before finalizing tests, ensure:
 - [ ] Assertions are meaningful and reflect user expectations
 - [ ] Tests follow consistent naming conventions
 - [ ] Code is properly formatted and commented
+
+## Commenting and documentation standards
+
+- Keep comments tied to intent: explain the scenario, a tricky user flow, or the reason a locator is intentionally resilient.
+- Do not add comments that simply narrate the next line of code or repeat the assertion in prose.
+- If a test depends on a browser quirk or an accessibility requirement, document that decision clearly, then keep the comment current when the test changes.

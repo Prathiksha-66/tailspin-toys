@@ -46,6 +46,14 @@ ALL UI components MUST use dark theme colors:
 - Use semantic grouping: layout, spacing, colors, typography
 - Keep utility combinations readable and maintainable
 
+## TypeScript and documentation conventions
+
+- Prefer explicit TypeScript types for props, helper parameters, and return values.
+- Use `import type` for type-only imports and keep runtime imports separate from type imports; the repo enforces this with ESLint (`@typescript-eslint/consistent-type-imports`).
+- When a code pattern is subtle or non-obvious, document the decision in a short comment or JSDoc, but do not restate the obvious implementation.
+- Keep naming and structure clear enough that the code reads like the product intent, with comments reserved for why a choice exists.
+- Follow the repo's existing formatting standards: prefer semicolons, consistent spacing, and readable multiline object formatting; avoid `any` unless a real escape hatch is unavoidable.
+
 ## Modern UI Patterns
 
 - Rounded corners: `rounded-lg`, `rounded-xl`, `rounded-2xl`
